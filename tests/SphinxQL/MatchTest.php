@@ -1,6 +1,6 @@
 <?php
 
-use Foolz\SphinxQL\Match;
+use Foolz\SphinxQL\MatchStatement;
 use Foolz\SphinxQL\SphinxQL;
 use Foolz\SphinxQL\Tests\TestUtil;
 
@@ -16,11 +16,11 @@ class MatchTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return Match
+     * @return MatchStatement
      */
     protected function createMatch()
     {
-        return new Match(self::$sphinxql);
+        return new MatchStatement(self::$sphinxql);
     }
 
     public function testMatch()
@@ -39,7 +39,7 @@ class MatchTest extends \PHPUnit\Framework\TestCase
             });
         $this->assertEquals('(a | b)', $match->compile()->getCompiled());
 
-        $sub = new Match(self::$sphinxql);
+        $sub = new MatchStatement(self::$sphinxql);
         $sub->match('a')->orMatch('b');
         $match = $this->createMatch()
             ->match($sub);

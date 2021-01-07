@@ -223,7 +223,7 @@ class SphinxQL
     {
         $this->connection = $connection;
     }
-    
+
     /**
      * Sets Query Type
      *
@@ -231,7 +231,7 @@ class SphinxQL
     public function setType(string $type)
     {
         return $this->type = $type;
-    }    
+    }
 
     /**
      * Returns the currently attached connection
@@ -470,10 +470,10 @@ class SphinxQL
             foreach ($this->match as $match) {
                 $pre = '';
                 if ($match['column'] instanceof \Closure) {
-                    $sub = new Match($this);
+                    $sub = new MatchStatement($this);
                     call_user_func($match['column'], $sub);
                     $pre .= $sub->compile()->getCompiled();
-                } elseif ($match['column'] instanceof Match) {
+                } elseif ($match['column'] instanceof MatchStatement) {
                     $pre .= $match['column']->compile()->getCompiled();
                 } elseif (empty($match['column'])) {
                     $pre .= '';
